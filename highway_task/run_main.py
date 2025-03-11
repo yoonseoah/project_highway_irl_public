@@ -13,12 +13,12 @@ app = wx.App()
 sub_num = ask(message = 'Enter participant ID')
 
 if sub_num !='':
-    session_num = 'prac'
-    duration_prac = 5
+    # session_num = 'prac'
+    # duration_prac = 5
 
-    run_highway(sub_num,session_num,duration_prac,0)
+    # run_highway(sub_num,session_num,duration_prac,0)
 
-    ctypes.windll.user32.MessageBoxW(0, "Practice is over. Press OK to continue.", "Practice over", 0)
+    # ctypes.windll.user32.MessageBoxW(0, "Practice is over. Press OK to continue.", "Practice over", 0)
 
     session_num = '01'
     duration = 17
