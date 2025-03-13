@@ -14,12 +14,12 @@ config_file = 'config_35_quick120.npy'
 config = np.load('env_configure/' + config_file, allow_pickle=True).tolist()
 max_speed = config['max_speed']
 discretize = False
-
-# Load CSV data
-file_path = "highway_task/data/345/01_episode0.csv"  # Update this path if needed
+ 
+# Load CSV data 어차피 npy 불러와서 할거면 필요없나
+file_path = "highway_task/data/1234/01_episode2.csv"  # Update this path if needed
 df = pd.read_csv(file_path)
 
-# Load overtaking indices
+# Load overtaking indices 이걸로 불러오기...
 overtaking_indices = np.load("overtaking_indices.npy")
 
 print(f"✅ 렌더링할 총 프레임 개수: {len(overtaking_indices)}")
@@ -99,7 +99,7 @@ for t in overtaking_indices:
     print(f"Step {t//10}: Time={rows.iloc[0]['time']}, dt={dt:.3f}, Action={action}, Reward={rows.iloc[0]['rewards']}")
 
     # Add delay to match real replay time
-    time.sleep(dt)
+    time.sleep(1.0) # 1초 동안 정지 후 다음 인덱스로 넘어감
 
 # Close the environment after replay
 env.close()

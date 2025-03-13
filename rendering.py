@@ -16,7 +16,7 @@ max_speed = config['max_speed']
 discretize = False
 
 # Load CSV data
-file_path = "highway_task/data/345/01_episode0.csv"  # Update this path if needed
+file_path = "highway_task/data/1234/01_episode2.csv"  # Update this path if needed
 df = pd.read_csv(file_path)
 
 # Initialize environment

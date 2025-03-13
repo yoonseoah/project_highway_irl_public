@@ -7,6 +7,7 @@ def overtaking_traj_revised(changing_threshold,overtake_distance_threshold,traj_
     over_action_full = []
     lane_changing_freq = np.zeros(num_sub)
     over_freq = np.zeros(num_sub)
+    overtake_indices_per_subject = []
 
     target_lane = 2 #0 = side lanes, 1 = middle lane, 2 = all
     # far_back_threshold = 0.5 #far enough back distance
@@ -98,6 +99,10 @@ def overtaking_traj_revised(changing_threshold,overtake_distance_threshold,traj_
         else:
             overtake_index = np.concatenate((overtake_index_middle,overtake_index_side))
 
+
+        # 참가자별 추월 인덱스 저장
+        overtake_indices_per_subject.append(overtake_index)
+
         over_freq[iSub] = len(overtake_index)
 
         lane_changing_index = np.squeeze(np.argwhere((target_action==target_actions[0])+(target_action==target_actions[1])))
@@ -161,6 +166,12 @@ def overtaking_traj_revised(changing_threshold,overtake_distance_threshold,traj_
         over_list_full.append(reward_traj_list)
         over_obs_full.append(obs_traj_list)
         over_action_full.append(action_traj_list)
+
+    # 🛠️ 모든 참가자의 데이터를 저장하는 부분 (반복문 **밖**에서 실행)
+    save_path = "overtake_indices_per_subject.npy"
+    np.save(save_path, np.array(overtake_indices_per_subject, dtype=object))
+
+    print(f"✅ Saved overtaking indices at {save_path}")
 
     #overtake traj
     mean_traj_list = np.zeros((traj_length,num_sub))
